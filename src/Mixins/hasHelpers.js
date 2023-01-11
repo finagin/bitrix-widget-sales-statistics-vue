@@ -51,7 +51,7 @@ export const hasHelpers = {
                 case 'null':
                     return null;
                 case undefined:
-                    return undefined;
+                    return true;
                 default:
                     return decodeURI(value);
             }
@@ -82,7 +82,7 @@ export const hasHelpers = {
     computed: {
         isDevelopment() {
             return location.origin.match('localhost')
-                || location.hash.match('development');
+                || this.getHash('development', false);
         },
         networkDelay() {
             const delay = this.random(2e2, 3e3);

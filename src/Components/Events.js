@@ -1,5 +1,5 @@
-import { Flag } from '../Icon/Flag';
-import { TableRow as TRow, TableColumn as TCol } from '../Table';
+import { Flag } from './Icon/Flag.js';
+import { TableRow as TRow, TableColumn as TCol } from './Table.js';
 
 export const Events = {
     name: 'Events',

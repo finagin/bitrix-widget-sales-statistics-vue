@@ -1,5 +1,6 @@
-import { Column as TableColumn } from './Column';
-import { Row as TableRow } from './Row';
+import { Column as TableColumn } from './Table/Column.js';
+import { Row as TableRow } from './Table/Row.js';
+import { Skeleton as TableSkeleton } from './Table/Skeleton.js';
 
 const Table = {
     components: {TableColumn, TableRow},
@@ -34,4 +35,4 @@ const Table = {
     },
 }
 
-export { Table, TableColumn, TableRow };
+export { Table, TableColumn, TableRow, TableSkeleton };

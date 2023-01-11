@@ -1,12 +1,11 @@
-import { default as mixins } from './Mixins';
-import { default as components } from './Components';
+import { default as mixins } from './Mixins.js';
+import { default as components } from './Components.js';
 
 export const App = {
     mixins,
     components,
     data() {
         return {
-            apiUrl: null,
             skeletonConfig: {
                 default: {
                     type: 'td',
@@ -40,7 +39,7 @@ export const App = {
                 <Events v-if="loaded" :event="event" v-for="event in events">
                     <Managers :manager="manager" v-for="manager in event.managers" />
                 </Events>
-                <Skeleton v-else v-for="index in 5" :config="skeletonConfig" />
+                <TableSkeleton v-else v-for="index in 5" :config="skeletonConfig" />
             </Table>
         </div>
     `,
