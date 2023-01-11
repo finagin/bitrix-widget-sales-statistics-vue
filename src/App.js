@@ -1,4 +1,4 @@
-import { default as mixins } from './Mixins';
+import { default as mixins } from './Mixins.js';
 import { default as components } from './Components';
 
 export const App = {
