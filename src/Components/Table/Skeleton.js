@@ -1,8 +1,9 @@
-import { TableRow, TableColumn } from '../../Table';
+import { Column } from './Column.js';
+import { Row } from './Row.js';
 
 export const Skeleton = {
     name: 'Skeleton',
-    components: {TRow: TableRow, TCol: TableColumn},
+    components: {TRow: Row, TCol: Column},
     props: {
         config: {
             type: Object,
