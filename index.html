@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="ru" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+</head>
+<body class="m-5 bg-white dark:bg-gray-900">
+<div id="app"></div>
+<div id="scripts">
+    <script type="module">
+        import { createApp } from 'https://unpkg.com/vue@3.2/dist/vue.esm-browser.js';
+        import { App } from './src/App.js';
+
+        createApp(App).mount('#app');
+    </script>
+</div>
+</body>
+</html>
