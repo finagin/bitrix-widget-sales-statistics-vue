@@ -15,6 +15,7 @@ const Table = {
                 <slot/>
             </tbody>
         </table>
+        <slot name="footer"/>
     `,
     computed: {
         classList() {

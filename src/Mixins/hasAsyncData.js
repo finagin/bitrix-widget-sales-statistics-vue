@@ -1,6 +1,5 @@
 'use strict';
 
-import { ref } from 'https://unpkg.com/vue@3.2/dist/vue.esm-browser.js';
 import { useState } from '../State.js';
 
 export const hasAsyncData = {
@@ -69,6 +68,8 @@ export const hasAsyncData = {
                     }, [])
                     .map((event) => {
                         const or0 = (value, defaultValue = 0) => +value || defaultValue;
+
+                        event.id = +event.id;
 
                         const eventCounters = event.managers.reduce((result, manager) => ({
                             count: or0(result.count) + or0(manager.count),

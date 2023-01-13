@@ -91,6 +91,13 @@ export const App = {
                     <Managers :manager="manager" v-for="manager in event.managers" />
                 </Events>
                 <TableSkeleton v-else v-for="index in 5" :config="skeletonConfig" />
+                <template #footer>
+                    <div v-show="loaded && !eventsFiltered.length" class="grid place-items-center m-10 font-black text-gray-400">
+                        <h3>
+                            Нет данных подходящих под заданные параметры.
+                        </h3>
+                    </div>
+                </template>
             </Table>
         </div>
     `,
