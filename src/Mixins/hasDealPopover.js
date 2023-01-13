@@ -8,7 +8,7 @@ export const hasDealPopover = {
         dealUrl(id) {
             const state = useState();
 
-            return 'https://' + state.domain + '/crm/deal/details/' + id;
+            return 'https://' + state.domain + '/crm/deal/details/' + id + '/';
         },
     },
 }

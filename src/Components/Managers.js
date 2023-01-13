@@ -44,7 +44,7 @@ export const Managers = {
         url() {
             const state = useState();
 
-            return 'https://' + state.domain + '/company/personal/user/' + this.manager.id
+            return 'https://' + state.domain + '/company/personal/user/' + this.manager.id + '/';
         },
     },
 }
