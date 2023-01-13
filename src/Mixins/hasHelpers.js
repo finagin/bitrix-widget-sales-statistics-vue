@@ -1,12 +1,15 @@
 'use strict';
 
 export const hasHelpers = {
+
     data() {
         return {
             started: new Date,
         }
     },
+
     methods: {
+
         random(min, max) {
             return Math.floor(Math.random() * (max - min + 1) + min)
         },
@@ -37,6 +40,7 @@ export const hasHelpers = {
                 console.debug(time, ...arguments);
             }
         },
+
         cast(value) {
             if (value == +value) {
                 // Take a look at ECMA 262, section 12.11, the second algorithm, 4.c.
@@ -56,6 +60,7 @@ export const hasHelpers = {
                     return decodeURI(value);
             }
         },
+
         getUrlParams(from, key, defaultValue) {
             const params = window.location[from]
                 .slice(1)
@@ -72,18 +77,32 @@ export const hasHelpers = {
                     ? params[key]
                     : defaultValue;
         },
+
         getQuery(key = null, defaultValue = null) {
             return this.getUrlParams('search', key, defaultValue);
         },
+
         getHash(key = null, defaultValue = null) {
             return this.getUrlParams('hash', key, defaultValue);
         },
+
+        boundaryValuesOf: (items, field) => items
+            .reduce((carry, item) => [
+                Math.min(item[field], carry[0]),
+                Math.max(item[field], carry[1]),
+            ], [0, 0]),
+
+        clone: (data) => JSON.parse(JSON.stringify(data)),
+
     },
+
     computed: {
+
         isDevelopment() {
             return location.origin.match('localhost')
                 || this.getHash('development', false);
         },
+
         networkDelay() {
             const delay = this.random(2e2, 3e3);
 
@@ -91,5 +110,7 @@ export const hasHelpers = {
 
             return delay;
         },
+
     },
+
 }

@@ -1,0 +1,80 @@
+{
+    "domain": "example.com",
+    "events": [
+        {
+            "id": "1",
+            "name": "Event #1",
+            "date": "19.01.2022",
+            "active": true,
+            "managers": {
+                "1": {
+                    "count": 3,
+                    "sum": 750,
+                    "plan": 1000,
+                    "deals": [
+                        {
+                            "id": "25875",
+                            "name": "Deal #25875"
+                        },
+                        {
+                            "id": "25999",
+                            "name": "Deal #25999"
+                        },
+                        {
+                            "id": "27875",
+                            "name": "Deal #27875"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "id": "2",
+            "name": "Event #2",
+            "date": "19.01.2023",
+            "active": false,
+            "managers": {
+                "2": {
+                    "count": 2,
+                    "sum": 1000,
+                    "plan": 1000,
+                    "deals": [
+                        {
+                            "id": "25375",
+                            "name": "Deal #25375"
+                        },
+                        {
+                            "id": "25399",
+                            "name": "Deal #25399"
+                        }
+                    ]
+                },
+                "3":{
+                    "count": 1,
+                    "sum": 500,
+                    "plan": 1000,
+                    "deals": [
+                        {
+                            "id": "25315",
+                            "name": "Deal #25315"
+                        }
+                    ]
+                }
+            }
+        }
+    ],
+    "managers": [
+        {
+            "id": 1,
+            "name": "Porter Cremin"
+        },
+        {
+            "id": 2,
+            "name": "Naomi Kuphal"
+        },
+        {
+            "id": 3,
+            "name": "Tyson Mitchell"
+        }
+    ]
+}

@@ -1,8 +1,9 @@
 import { Flag } from './Icon/Flag.js';
+import { hasDealPopover } from '../Mixins/hasDealPopover.js';
 import { TableRow as TRow, TableColumn as TCol } from './Table.js';
 
 export const Events = {
-    name: 'Events',
+    mixins: [hasDealPopover],
     components: {Flag, TRow, TCol},
     props: {
         event: {
@@ -19,7 +20,19 @@ export const Events = {
         <template v-if="true">
             <TRow @click="collapsed = !collapsed" replaceClassList :class="classList">
                 <TCol type="th" scope="row">{{ event.name }}</TCol>
-                <TCol>{{ event.count }}</TCol>
+                <TCol>
+                    <Popover>
+                        {{ event.count }}
+                        <template #popover>
+                            <p>Сделки:</p>
+                            <ul>
+                                <li v-for="deal in event.deals" class="flex items-center">
+                                    <a :href="dealUrl(deal.id)" target="_blank" class="underline text-grey-200 hover:text-grey-50">{{ deal.name }}</a>
+                                </li>
+                            </ul>
+                        </template>
+                    </Popover>
+                </TCol>
                 <TCol>{{ event.sum }}</TCol>
                 <TCol>{{ event.plan }}</TCol>
                 <TCol>{{ event.percent }}%</TCol>

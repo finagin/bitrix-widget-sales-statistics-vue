@@ -1,0 +1,188 @@
+{
+    "$id": "https://finagin.github.io/bitrix-widget-sales-statistics-vue/static/api.schema.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "Widget API Data Schema",
+    "type": "object",
+    "description": "Widget API Data Schema.",
+    "properties": {
+        "domain": {
+            "type": "string",
+            "description": "Bitrix CRM domain.",
+            "examples": [
+                "example.com"
+            ]
+        },
+        "events": {
+            "type": "array",
+            "description": "The events of CRM.",
+            "items": {
+                "$ref": "#/$defs/event"
+            }
+        },
+        "managers": {
+            "type": "array",
+            "description": "The managers of CRM.",
+            "items": {
+                "$ref": "#/$defs/manager"
+            }
+        }
+    },
+    "additionalProperties": false,
+    "required": [
+        "domain",
+        "events",
+        "managers"
+    ],
+    "$defs": {
+        "event": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "The unique identifier of the event.",
+                    "examples": [
+                        1
+                    ]
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the event.",
+                    "examples": [
+                        "Event #1"
+                    ]
+                },
+                "date": {
+                    "type": "string",
+                    "description": "The date of the event.",
+                    "examples": [
+                        "2021-01-01"
+                    ]
+                },
+                "active": {
+                    "type": "boolean",
+                    "description": "The status of the event.",
+                    "examples": [
+                        true,
+                        false
+                    ]
+                },
+                "managers": {
+                    "type": "object",
+                    "description": "The managers of the event.",
+                    "propertyNames": {
+                        "pattern": "^\\d$"
+                    },
+                    "patternProperties": {
+                        "^\\d$": {
+                            "$ref": "#/$defs/eventManager"
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "id",
+                "name",
+                "date",
+                "active",
+                "managers"
+            ]
+        },
+        "eventManager": {
+            "type": "object",
+            "properties": {
+                "count": {
+                    "type": "integer",
+                    "description": "The count sales of the manager.",
+                    "examples": [
+                        1,
+                        50,
+                        100
+                    ]
+                },
+                "sum": {
+                    "type": "number",
+                    "description": "The sum sales of the manager.",
+                    "examples": [
+                        1000,
+                        5000,
+                        10000
+                    ]
+                },
+                "plan": {
+                    "type": "number",
+                    "description": "The plan sales of the manager.",
+                    "examples": [
+                        1000,
+                        5000,
+                        10000
+                    ]
+                },
+                "deals": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/eventManagerDeal"
+                    }
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "count",
+                "sum",
+                "plan",
+                "deals"
+            ]
+        },
+        "eventManagerDeal": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "The unique identifier of the deal.",
+                    "examples": [
+                        1
+                    ]
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the deal.",
+                    "examples": [
+                        "Deal #1"
+                    ]
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "id",
+                "name"
+            ]
+        },
+        "manager": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "The unique identifier of the manager.",
+                    "examples": [
+                        1
+                    ]
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the manager.",
+                    "examples": [
+                        "Porter Cremin",
+                        "Naomi Kuphal",
+                        "Tyson Mitchell"
+                    ]
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "id",
+                "name"
+            ]
+        }
+    }
+}
