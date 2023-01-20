@@ -74,12 +74,6 @@ export const hasAsyncData = {
                         const eventCounters = event.managers.reduce((result, manager) => ({
                             count: or0(result.count) + or0(manager.count),
                             sum: or0(result.sum) + or0(manager.sum),
-                            plan: or0(result.plan) + or0(manager.plan),
-                            percent: this.percent(
-                                or0(result.sum) + or0(manager.sum),
-                                or0(result.plan) + or0(manager.plan),
-                                2,
-                            ),
                             deals: [...(result?.deals || []), ...(manager?.deals || [])]
                                 .map(deal => ({...deal})),
                         }), {});
