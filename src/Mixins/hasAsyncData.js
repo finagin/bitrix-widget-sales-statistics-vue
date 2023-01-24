@@ -70,6 +70,7 @@ export const hasAsyncData = {
                         const or0 = (value, defaultValue = 0) => +value || defaultValue;
 
                         event.id = +event.id;
+                        event.percent = this.cast(event.percent).toFixed(2);
 
                         const eventCounters = event.managers.reduce((result, manager) => ({
                             count: or0(result.count) + or0(manager.count),
