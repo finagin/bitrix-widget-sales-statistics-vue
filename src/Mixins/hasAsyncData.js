@@ -84,7 +84,6 @@ export const hasAsyncData = {
             );
         },
         eventsFiltered() {
-
             const range = (key) => (event) => {
                 if (!this.query[key]) {
                     return true;
@@ -100,15 +99,19 @@ export const hasAsyncData = {
             };
 
             return this.clone(this.events)
-                .filter((event) => this.query.event === null || event.id === this.query.event)
+                .filter((event) =>
+                    this.query.event.length &&
+                    this.query.event[0] === null ||
+                    this.query.event.includes(event.id)
+                )
                 .map((event) => {
-                    if (this.query.manager === null) {
+                    if (this.query.manager[0] === null) {
                         return event;
                     }
 
                     event.managers = event.managers
                         .reduce((result, manager) => {
-                            if (manager.id === this.query.manager) {
+                            if (this.query.manager.includes(manager.id)) {
                                 result.push(manager)
                             }
 
@@ -140,32 +143,66 @@ export const hasAsyncData = {
                 .filter(range('count'))
                 .filter(range('sum'))
                 .filter(range('plan'))
-                .filter(range('percent'))
+                .filter(range('percent'));
+        },
+        eventsTotal() {
+            const defaults = (event) => ({name: 'Итого:', ...event});
+
+            return defaults(this.eventsFiltered.reduce((result, event) => ({
+                count: result.count + +event.count,
+                sum: result.sum + +event.sum,
+                plan: result.plan + +event.plan,
+                percent: this.percent(result.sum + +event.sum, result.plan + +event.plan, 2),
+                deals: [...result.deals, ...(event?.deals || [])],
+            }), {
+                count: 0,
+                sum: 0,
+                plan: 0,
+                deals: [],
+            }));
+        },
+        managersTotal() {
+            return this.eventsFiltered.reduce((carry, event) => {
+                event.managers.forEach(manager => {
+                    carry[manager.id] = {
+                        name: manager.name,
+                        count: (carry[manager.id] ? carry[manager.id].count : 0) + +manager.count,
+                        sum: (carry[manager.id] ? carry[manager.id].sum : 0) + +manager.sum,
+                        plan: (carry[manager.id] ? carry[manager.id].plan : 0) + +manager.plan,
+                        percent: this.percent(
+                            (carry[manager.id] ? carry[manager.id].sum : 0) + +manager.sum,
+                            (carry[manager.id] ? carry[manager.id].plan : 0) + +manager.plan,
+                            2,
+                        ),
+                        deals: [...(carry[manager.id]?.deals || []), ...(manager?.deals || [])],
+                    };
+                });
+
+                return carry;
+            }, {});
         },
         eventOptions(state) {
             let stateEvents = state.__source.events ?? [];
+            const defaults = (obj) => ({...{description: '', active: false, conflict: false}, ...obj});
 
             return [
-                {key: 'Все', value: null},
-                ...stateEvents.map(event => {
-                    return {
+                defaults({key: 'Все', value: null, active: true, conflict: true}),
+                ...stateEvents.map(event => defaults({
                         key: event.name,
                         value: parseInt(event.id),
-                    }
-                }),
+                })),
             ];
         },
         managerOptions(state) {
             let stateManagers = state.__source.managers ?? [];
+            const defaults = (obj) => ({...{description: '', active: false, conflict: false}, ...obj});
 
             return [
-                {key: 'Все', value: null},
-                ...stateManagers.map(event => {
-                    return {
-                        key: event.name,
-                        value: parseInt(event.id),
-                    }
-                }),
+                defaults({key: 'Все', value: null, active: true, conflict: true}),
+                ...stateManagers.map(event => defaults({
+                    key: event.name,
+                    value: parseInt(event.id),
+                })),
             ];
         },
         countBoundaryValues(state) {

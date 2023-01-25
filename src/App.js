@@ -23,8 +23,8 @@ export const App = {
                 ],
             },
             query: {
-                event: null,
-                manager: null,
+                event: [null],
+                manager: [null],
                 date: {
                     from: null,
                     to: null,
@@ -87,9 +87,14 @@ export const App = {
                     <TableColumn type="th">Дата</TableColumn>
                     <TableColumn type="th" class="p-4"></TableColumn>
                 </template>
-                <Events v-if="loaded" :event="event" v-for="event in eventsFiltered">
-                    <Managers :manager="manager" v-for="manager in event.managers" />
-                </Events>
+                <template v-if="loaded">
+                    <Events :event="event" v-for="event in eventsFiltered">
+                        <Managers :manager="manager" v-for="manager in event.managers" />
+                    </Events>
+                    <Events :event="eventsTotal">
+                        <Managers :manager="manager" v-for="manager in managersTotal" />
+                    </Events>
+                </template>
                 <TableSkeleton v-else v-for="index in 5" :config="skeletonConfig" />
                 <template #footer>
                     <div v-show="loaded && !eventsFiltered.length" class="grid place-items-center m-10 font-black text-gray-400">

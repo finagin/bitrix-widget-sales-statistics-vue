@@ -37,7 +37,7 @@ export const Events = {
                 <TCol>{{ event.plan }}</TCol>
                 <TCol>{{ event.percent }}%</TCol>
                 <TCol>{{ event.date }}</TCol>
-                <TCol class="p-4 w-4"><flag :active="event.active" /></TCol>
+                <TCol class="p-4 w-4"><flag v-if="event.active !== undefined" :active="event.active" /></TCol>
             </TRow>
             <transition-group name="fade">
                 <template v-if="!collapsed">
