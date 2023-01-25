@@ -33,7 +33,7 @@ export const Events = {
                                 <li v-for="deal in event.deals">
                                     <a :href="dealUrl(deal.id)" target="_blank" class="underline text-grey-200 hover:text-grey-50">{{ deal.name }}</a>
                                 </li>
-                            </ul>
+                            </ol>
                         </template>
                     </Popover>
                 </TCol>
