@@ -91,8 +91,8 @@ export const App = {
                     <Events :event="event" v-for="event in eventsFiltered">
                         <Managers :manager="manager" v-for="manager in event.managers" />
                     </Events>
-                    <Events :event="eventsTotal">
-                        <Managers :manager="manager" v-for="manager in managersTotal" />
+                    <Events :event="eventsTotal" isTotal>
+                        <Managers :manager="manager" v-for="manager in managersTotal" isTotal />
                     </Events>
                 </template>
                 <TableSkeleton v-else v-for="index in 5" :config="skeletonConfig" />

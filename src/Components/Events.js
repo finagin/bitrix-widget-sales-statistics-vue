@@ -10,6 +10,10 @@ export const Events = {
             type: Object,
             required: true,
         },
+        isTotal: {
+            type: Boolean,
+            default: false,
+        },
     },
     data() {
         return {
@@ -24,9 +28,9 @@ export const Events = {
                     <Popover>
                         {{ event.count }}
                         <template #popover>
-                            <p>Сделки:</p>
-                            <ul>
-                                <li v-for="deal in event.deals" class="flex items-center">
+                            <p class="font-black">Сделки:</p>
+                            <ol class="ml-6 list-decimal">
+                                <li v-for="deal in event.deals">
                                     <a :href="dealUrl(deal.id)" target="_blank" class="underline text-grey-200 hover:text-grey-50">{{ deal.name }}</a>
                                 </li>
                             </ul>
@@ -48,21 +52,37 @@ export const Events = {
     `,
     computed: {
         classList() {
-            return [
+            const defaults = (extra) => ([...[
                 'cursor-pointer',
                 // text block
                 'font-medium',
-                'text-gray-900',
-                'dark:text-white',
                 'whitespace-nowrap',
 
                 'dark:border-gray-700',
-                // background block
-                'bg-gray-100',
-                'hover:bg-gray-200',
-                'dark:bg-gray-700',
-                'dark:hover:bg-gray-500 '
-            ];
+            ], ...extra]);
+
+
+            return defaults(this.isTotal
+                ? [
+                    // text block
+                    'text-white',
+                    'dark:text-gray-900',
+                    // background block
+                    'bg-blue-700',
+                    'hover:bg-blue-600',
+                    'dark:bg-blue-100',
+                    'dark:hover:bg-blue-200',
+                ] : [
+                    // text block
+                    'text-gray-900',
+                    'dark:text-white',
+                    // background block
+                    'bg-gray-100',
+                    'hover:bg-gray-200',
+                    'dark:bg-gray-700',
+                    'dark:hover:bg-gray-500',
+                ],
+            );
         },
     },
 };
